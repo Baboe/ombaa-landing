@@ -13,6 +13,45 @@
 <meta property="og:locale" content="nl_NL" />
 <link rel="canonical" href="https://ombaa.com/" />
 
+<!-- Structured data voor Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ombaa.com/#website",
+      "url": "https://ombaa.com/",
+      "name": "Ombaa",
+      "description": "Zeg wat je wil doen. Iemand gaat met je mee.",
+      "inLanguage": "nl-NL",
+      "publisher": {"@id": "https://ombaa.com/#organization"}
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://ombaa.com/#organization",
+      "name": "Ombaa",
+      "url": "https://ombaa.com/",
+      "description": "Ombaa is een voice-first social app waarmee je makkelijk samen dingen doet met mensen in jouw buurt.",
+      "foundingLocation": {
+        "@type": "Place",
+        "addressCountry": "NL"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://ombaa.com/#webpage",
+      "url": "https://ombaa.com/",
+      "name": "Ombaa — Kom je ook?",
+      "description": "Zeg wat je wil doen. Iemand gaat met je mee. Schrijf je in voor Ombaa.",
+      "inLanguage": "nl-NL",
+      "isPartOf": {"@id": "https://ombaa.com/#website"},
+      "about": {"@id": "https://ombaa.com/#organization"}
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
