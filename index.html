@@ -691,28 +691,30 @@ footer .logo{margin:0 auto 20px;display:flex;justify-content:center}
       <h2 id="signup-title" class="reveal">Doe mee met<br>de eerste groep.</h2>
       <p class="signup-sub reveal" data-d="1">Je hoort het als eerste wanneer Ombaa er is.</p>
 
-      <form id="signupForm"
-            action="https://formspree.io/f/JOUW_ID"
-            method="POST"
-            class="reveal" data-d="2"
-            novalidate>
+      <form method="post"
+            action="https://sendfox.com/form/10dlqq/mp9ynq"
+            class="sendfox-form reveal"
+            id="mp9ynq"
+            data-async="false"
+            data-recaptcha="true"
+            data-d="2">
         <div class="field">
-          <label for="naam">Naam</label>
-          <input type="text" id="naam" name="naam" autocomplete="given-name" placeholder="Jouw naam" required />
+          <label for="sendfox_form_name">Naam</label>
+          <input type="text" id="sendfox_form_name" name="first_name" autocomplete="given-name" placeholder="Jouw naam" required />
         </div>
         <div class="field">
-          <label for="email">E-mailadres</label>
-          <input type="email" id="email" name="email" autocomplete="email" placeholder="jij@voorbeeld.nl" required />
+          <label for="sendfox_form_email">E-mailadres</label>
+          <input type="email" id="sendfox_form_email" name="email" autocomplete="email" placeholder="jij@voorbeeld.nl" required />
+        </div>
+        <!-- geen bots -->
+        <div style="position:absolute;left:-5000px;" aria-hidden="true">
+          <input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" />
         </div>
         <div class="form-footer">
           <button type="submit" class="btn btn-primary">Ik ga mee</button>
           <p class="privacy-note">We gebruiken je gegevens alleen om je te laten weten wanneer Ombaa klaar is.</p>
         </div>
       </form>
-
-      <div class="form-success" id="formSuccess" role="status" aria-live="polite">
-        Dankjewel —<br>je staat op de lijst.<br>We laten van ons horen.
-      </div>
     </div>
   </section>
 
@@ -760,43 +762,8 @@ footer .logo{margin:0 auto 20px;display:flex;justify-content:center}
   els.forEach(function(el){io.observe(el)});
 })();
 
-// Form
-(function(){
-  var form = document.getElementById('signupForm');
-  var success = document.getElementById('formSuccess');
-  if(!form) return;
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var naam = form.naam.value.trim();
-    var email = form.email.value.trim();
-    if(!naam || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-      alert('Vul je naam en een geldig e-mailadres in.');
-      return;
-    }
-    var btn = form.querySelector('button[type=submit]');
-    btn.disabled = true;
-    btn.textContent = 'Een momentje…';
-    fetch(form.action,{
-      method:'POST',
-      body:new FormData(form),
-      headers:{'Accept':'application/json'}
-    }).then(function(r){
-      if(r.ok){
-        form.style.display='none';
-        success.classList.add('show');
-      } else {
-        btn.disabled=false;
-        btn.textContent='Ik ga mee';
-        alert('Er ging iets mis. Probeer het zo nog eens.');
-      }
-    }).catch(function(){
-      btn.disabled=false;
-      btn.textContent='Ik ga mee';
-      alert('Er ging iets mis. Probeer het zo nog eens.');
-    });
-  });
-})();
 </script>
+<script src="https://cdn.sendfox.com/js/form.js" charset="utf-8"></script>
 
 </body>
 </html>
