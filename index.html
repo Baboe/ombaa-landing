@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ombaa — Kom je ook?</title>
-<meta name="description" content="Zeg wat je wil doen. Iemand doet mee. Schrijf je in voor Ombaa — de nieuwe app voor 45+ die het makkelijk maakt om samen dingen te doen." />
+<meta name="description" content="Zeg wat je wil doen. Iemand gaat met je mee. Schrijf je in voor Ombaa." />
 <meta name="theme-color" content="#F5F0E8" />
 <meta property="og:title" content="Ombaa — Kom je ook?" />
-<meta property="og:description" content="Zeg wat je wil doen. Iemand doet mee. Schrijf je in voor Ombaa." />
+<meta property="og:description" content="Zeg wat je wil doen. Iemand gaat met je mee. Schrijf je in voor Ombaa." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ombaa.com/" />
 <meta property="og:locale" content="nl_NL" />
@@ -15,346 +15,664 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'%3E%3Ccircle cx='22' cy='20' r='18' fill='%234A2D3E'/%3E%3Ccircle cx='42' cy='20' r='18' fill='%23C4614A'/%3E%3Cellipse cx='32' cy='20' rx='6' ry='12' fill='%237A3D52'/%3E%3C/svg%3E" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'%3E%3Ccircle cx='22' cy='20' r='18' fill='%234A2D3E'/%3E%3Ccircle cx='42' cy='20' r='18' fill='%23C4614A'/%3E%3Ccircle cx='32' cy='20' r='6' fill='%237A3D52'/%3E%3C/svg%3E" />
 
 <style>
-  :root{
-    --cream:#F5F0E8;
-    --terracotta:#C4614A;
-    --terracotta-dark:#A8513E;
-    --aubergine:#4A2D3E;
-    --overlap:#7A3D52;
-    --warm-grey:#5C4A42;
-    --soft-line:rgba(74,45,62,.12);
-  }
+:root{
+  --cream:#F5F0E8;
+  --terracotta:#C4614A;
+  --terracotta-dark:#A8513E;
+  --aubergine:#4A2D3E;
+  --aubergine-mid:#5C3850;
+  --overlap:#7A3D52;
+  --warm-grey:#5C4A42;
+  --nav-h:72px;
+}
 
-  *{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 
-  html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-size:18px;
+  line-height:1.6;
+  color:var(--warm-grey);
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
 
-  body{
-    font-family:'DM Sans',system-ui,-apple-system,sans-serif;
-    font-weight:400;
-    font-size:18px;
-    line-height:1.6;
-    color:var(--warm-grey);
-    background:var(--cream);
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-  }
+/* ── Grain overlay ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:999;
+  opacity:.032;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
 
-  h1,h2,h3{
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:300;
-    color:var(--aubergine);
-    letter-spacing:-.01em;
-    line-height:1.15;
-  }
+/* ── Nav ── */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  z-index:100;
+  transition:background .3s ease, box-shadow .3s ease;
+  padding:0 40px;
+}
+.nav.scrolled{
+  background:rgba(245,240,232,.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 1px 0 rgba(74,45,62,.08);
+}
+.nav-inner{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-  a{color:var(--aubergine);text-decoration:underline;text-underline-offset:3px}
-  a:hover{color:var(--terracotta)}
+.logo{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+.logo svg{display:block;height:34px;width:auto}
+.logo-text{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:24px;
+  color:var(--aubergine);
+}
 
-  .container{
-    width:100%;
-    max-width:760px;
-    margin:0 auto;
-    padding:0 24px;
-  }
+.nav-cta{
+  font-family:'DM Sans',sans-serif;
+  font-size:16px;
+  font-weight:500;
+  padding:12px 26px;
+  border-radius:999px;
+  border:1.5px solid var(--aubergine);
+  color:var(--aubergine);
+  background:transparent;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+  white-space:nowrap;
+}
+.nav-cta:hover{
+  background:var(--aubergine);
+  color:var(--cream);
+}
 
-  /* Header / logo */
-  header{
-    padding:32px 0 16px;
-  }
+/* ── Hero ── */
+.hero{
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  padding:var(--nav-h) 40px 80px;
+}
 
-  .logo{
-    display:inline-flex;
-    align-items:center;
-    gap:14px;
-    text-decoration:none;
-  }
-  .logo svg{display:block;height:40px;width:auto}
-  .logo-text{
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:300;
-    font-size:32px;
-    color:var(--aubergine);
-    letter-spacing:.01em;
-  }
+/* Animated orbs */
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:.55;
+  pointer-events:none;
+}
+.orb-1{
+  width:55vw;height:55vw;
+  background:radial-gradient(circle, #7A3D52 0%, transparent 70%);
+  top:-15%;left:-10%;
+  animation:drift1 18s ease-in-out infinite alternate;
+}
+.orb-2{
+  width:45vw;height:45vw;
+  background:radial-gradient(circle, #C4614A 0%, transparent 70%);
+  bottom:-10%;right:-5%;
+  opacity:.35;
+  animation:drift2 22s ease-in-out infinite alternate;
+}
+.orb-3{
+  width:30vw;height:30vw;
+  background:radial-gradient(circle, #4A2D3E 0%, transparent 70%);
+  top:40%;left:55%;
+  opacity:.2;
+  animation:drift3 16s ease-in-out infinite alternate;
+}
 
-  /* Hero */
-  .hero{
-    padding:48px 0 64px;
-    text-align:left;
-  }
-  .hero h1{
-    font-size:clamp(48px,8vw,84px);
-    margin-bottom:20px;
-  }
-  .hero .subkop{
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:300;
-    font-size:clamp(22px,3.4vw,30px);
-    color:var(--aubergine);
-    margin-bottom:28px;
-    line-height:1.3;
-  }
-  .hero p.intro{
-    font-size:19px;
-    max-width:560px;
-    color:var(--warm-grey);
-  }
+@keyframes drift1{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(6vw,4vh) scale(1.08)}
+}
+@keyframes drift2{
+  from{transform:translate(0,0) scale(1.05)}
+  to{transform:translate(-5vw,-6vh) scale(1)}
+}
+@keyframes drift3{
+  from{transform:translate(0,0)}
+  to{transform:translate(-4vw,5vh)}
+}
 
-  /* Sections */
-  section{padding:56px 0}
+.hero-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width:1100px;
+}
 
-  h2{
-    font-size:clamp(32px,5vw,44px);
-    margin-bottom:40px;
-  }
+.hero-kicker{
+  display:inline-block;
+  font-size:15px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+  margin-bottom:40px;
+  opacity:0;
+  animation:fadeUp .8s .2s cubic-bezier(.2,.6,.2,1) forwards;
+}
 
-  /* Steps */
-  .steps{
-    display:grid;
-    gap:28px;
-  }
+.hero h1{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(44px,7.5vw,112px);
+  line-height:1.04;
+  color:var(--aubergine);
+  letter-spacing:-.025em;
+  margin-bottom:48px;
+  opacity:0;
+  animation:fadeUp .9s .35s cubic-bezier(.2,.6,.2,1) forwards;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--terracotta);
+}
+
+.hero-sub{
+  font-size:clamp(18px,2vw,22px);
+  color:var(--warm-grey);
+  margin-bottom:64px;
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  opacity:0;
+  animation:fadeUp .9s .5s cubic-bezier(.2,.6,.2,1) forwards;
+}
+
+.hero-actions{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  opacity:0;
+  animation:fadeUp .9s .65s cubic-bezier(.2,.6,.2,1) forwards;
+}
+
+/* ── Buttons ── */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'DM Sans',sans-serif;
+  font-weight:500;
+  font-size:19px;
+  padding:20px 44px;
+  border-radius:999px;
+  cursor:pointer;
+  border:none;
+  min-height:60px;
+  transition:background .2s ease, color .2s ease, transform .15s ease, box-shadow .2s ease;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--terracotta);
+  color:#fff;
+  box-shadow:0 4px 24px rgba(196,97,74,.3);
+}
+.btn-primary:hover{
+  background:var(--terracotta-dark);
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(196,97,74,.4);
+}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{
+  background:transparent;
+  color:var(--aubergine);
+  border:1.5px solid rgba(74,45,62,.3);
+}
+.btn-ghost:hover{
+  border-color:var(--aubergine);
+  background:rgba(74,45,62,.05);
+}
+
+/* ── Scroll indicator ── */
+.scroll-hint{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  opacity:0;
+  animation:fadeIn 1s 1.4s ease forwards;
+}
+.scroll-hint span{
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+  opacity:.6;
+}
+.scroll-line{
+  width:1px;
+  height:48px;
+  background:linear-gradient(to bottom, var(--aubergine), transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{
+  0%,100%{opacity:.3;transform:scaleY(1)}
+  50%{opacity:.8;transform:scaleY(.6)}
+}
+
+/* ── Statement section ── */
+.statement{
+  padding:160px 40px;
+  text-align:center;
+  background:var(--aubergine);
+}
+.statement p{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(32px,5.5vw,68px);
+  line-height:1.18;
+  color:var(--cream);
+  letter-spacing:-.02em;
+  max-width:22ch;
+  margin:0 auto;
+}
+.statement p em{
+  font-style:italic;
+  color:rgba(245,240,232,.6);
+}
+
+/* ── How it works ── */
+.how{
+  padding:160px 40px 200px;
+  background:var(--cream);
+}
+.how-top{
+  text-align:center;
+  margin-bottom:140px;
+}
+.section-label{
+  display:inline-block;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+  margin-bottom:28px;
+}
+.how h2{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(36px,5vw,64px);
+  color:var(--aubergine);
+  letter-spacing:-.02em;
+  line-height:1.1;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+  max-width:800px;
+  margin:0 auto;
+}
+.step{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:0 40px;
+  align-items:start;
+  padding:64px 0;
+  border-top:1px solid rgba(74,45,62,.1);
+}
+.step:last-child{border-bottom:1px solid rgba(74,45,62,.1)}
+
+.step-num{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:56px;
+  color:var(--terracotta);
+  line-height:1;
+  padding-top:4px;
+  opacity:.7;
+}
+.step-body h3{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(26px,3.2vw,40px);
+  color:var(--aubergine);
+  letter-spacing:-.015em;
+  line-height:1.2;
+  margin-bottom:16px;
+}
+.step-body p{
+  font-size:19px;
+  color:var(--warm-grey);
+  line-height:1.6;
+  max-width:480px;
+}
+
+/* ── Signup ── */
+.signup{
+  background:var(--aubergine);
+  padding:160px 40px;
+  position:relative;
+  overflow:hidden;
+}
+.signup::before{
+  content:'';
+  position:absolute;
+  width:70vw;height:70vw;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(196,97,74,.2) 0%, transparent 70%);
+  top:-20%;right:-15%;
+  pointer-events:none;
+}
+.signup-inner{
+  position:relative;
+  z-index:2;
+  max-width:600px;
+  margin:0 auto;
+}
+.signup h2{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(36px,5vw,64px);
+  color:var(--cream);
+  letter-spacing:-.02em;
+  line-height:1.12;
+  margin-bottom:20px;
+}
+.signup-sub{
+  font-size:20px;
+  color:rgba(245,240,232,.75);
+  margin-bottom:72px;
+  line-height:1.5;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+}
+.field{position:relative}
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:rgba(245,240,232,.55);
+  margin-bottom:14px;
+}
+.field input{
+  width:100%;
+  font-family:'DM Sans',sans-serif;
+  font-size:22px;
+  padding:0 0 18px;
+  background:transparent;
+  color:var(--cream);
+  border:none;
+  border-bottom:1px solid rgba(245,240,232,.25);
+  border-radius:0;
+  transition:border-color .25s ease;
+  caret-color:var(--terracotta);
+}
+.field input::placeholder{color:rgba(245,240,232,.3)}
+.field input:focus{
+  outline:none;
+  border-bottom-color:var(--terracotta);
+}
+.field input:-webkit-autofill{
+  -webkit-text-fill-color:var(--cream);
+  -webkit-box-shadow:0 0 0 1000px var(--aubergine) inset;
+}
+
+.form-footer{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  align-items:flex-start;
+}
+.privacy-note{
+  font-size:14px;
+  color:rgba(245,240,232,.45);
+  line-height:1.6;
+  max-width:420px;
+}
+
+.form-success{
+  display:none;
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(26px,3.5vw,40px);
+  color:var(--cream);
+  line-height:1.35;
+  letter-spacing:-.01em;
+}
+.form-success.show{display:block}
+
+/* ── Footer ── */
+footer{
+  padding:80px 40px 56px;
+  text-align:center;
+  background:var(--cream);
+  border-top:1px solid rgba(74,45,62,.08);
+}
+footer .logo{margin:0 auto 20px;display:flex;justify-content:center}
+.footer-tag{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:20px;
+  color:var(--aubergine);
+  margin-bottom:8px;
+}
+.footer-url{
+  font-size:14px;
+  color:var(--warm-grey);
+  opacity:.55;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.1s}
+.reveal[data-d="2"]{transition-delay:.2s}
+.reveal[data-d="3"]{transition-delay:.3s}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .nav{padding:0 24px}
+  .nav-cta{font-size:15px;padding:11px 22px}
+
+  .hero{padding:calc(var(--nav-h) + 40px) 24px 100px}
+  .hero h1{letter-spacing:-.02em}
+
+  .statement{padding:100px 24px}
+
+  .how{padding:100px 24px 120px}
+  .how-top{margin-bottom:80px}
   .step{
-    display:flex;
-    gap:22px;
-    align-items:flex-start;
-    padding:24px;
-    background:rgba(255,255,255,.4);
-    border:1px solid var(--soft-line);
-    border-radius:16px;
-  }
-  .step-num{
-    flex-shrink:0;
-    width:48px;height:48px;
-    border-radius:50%;
-    background:var(--terracotta);
-    color:var(--cream);
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:400;
-    font-size:22px;
-    display:flex;align-items:center;justify-content:center;
-    line-height:1;
-  }
-  .step h3{
-    font-size:22px;
-    margin-bottom:6px;
-    font-weight:400;
-  }
-  .step p{font-size:17px;color:var(--warm-grey)}
-
-  /* Form */
-  .signup{
-    background:rgba(255,255,255,.55);
-    border:1px solid var(--soft-line);
-    border-radius:20px;
-    padding:40px 32px;
-  }
-  .signup h2{margin-bottom:12px}
-  .signup .lead{
-    font-size:18px;
-    margin-bottom:28px;
-    max-width:520px;
-  }
-
-  form{
-    display:grid;
-    gap:16px;
-    max-width:480px;
-  }
-  label{
-    display:block;
-    font-size:16px;
-    font-weight:500;
-    color:var(--aubergine);
-    margin-bottom:6px;
-  }
-  input[type=text],
-  input[type=email]{
-    width:100%;
-    font-family:inherit;
-    font-size:18px;
-    padding:14px 16px;
-    border:1.5px solid var(--soft-line);
-    border-radius:10px;
-    background:var(--cream);
-    color:var(--aubergine);
-    transition:border-color .15s ease;
-  }
-  input:focus{
-    outline:none;
-    border-color:var(--terracotta);
-  }
-
-  button[type=submit]{
-    margin-top:8px;
-    font-family:'DM Sans',sans-serif;
-    font-weight:500;
-    font-size:19px;
-    padding:16px 28px;
-    background:var(--terracotta);
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    transition:background .15s ease, transform .1s ease;
-  }
-  button[type=submit]:hover{background:var(--terracotta-dark)}
-  button[type=submit]:active{transform:translateY(1px)}
-  button[type=submit]:disabled{opacity:.6;cursor:not-allowed}
-
-  .form-note{
-    margin-top:14px;
-    font-size:15px;
-    color:var(--warm-grey);
-  }
-
-  .form-success{
-    display:none;
-    padding:20px;
-    background:rgba(196,97,74,.1);
-    border:1px solid var(--terracotta);
-    border-radius:10px;
-    color:var(--aubergine);
-    font-size:18px;
-  }
-  .form-success.show{display:block}
-
-  /* Footer */
-  footer{
-    margin-top:40px;
+    grid-template-columns:1fr;
+    gap:12px;
     padding:48px 0;
-    border-top:1px solid var(--soft-line);
-    text-align:center;
   }
-  footer .logo{margin-bottom:16px}
-  footer .tag{
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:300;
-    font-size:22px;
-    color:var(--aubergine);
-    margin-bottom:8px;
-  }
-  footer .site{
-    font-size:16px;
-    color:var(--warm-grey);
-  }
+  .step-num{font-size:40px}
 
-  /* Mobile tweaks */
-  @media (max-width:540px){
-    body{font-size:17px}
-    header{padding:24px 0 8px}
-    .hero{padding:32px 0 40px}
-    section{padding:40px 0}
-    .signup{padding:28px 22px;border-radius:16px}
-    .step{padding:20px;gap:16px}
-    .step-num{width:42px;height:42px;font-size:20px}
-    .logo svg{height:36px}
-    .logo-text{font-size:28px}
-  }
+  .signup{padding:100px 24px}
+  .signup-sub{margin-bottom:48px}
+  .field input{font-size:20px}
 
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none !important;scroll-behavior:auto !important}
+  footer{padding:64px 24px 48px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .orb{animation:none}
+  .scroll-line{animation:none}
+  .hero-kicker,.hero h1,.hero-sub,.hero-actions,.scroll-hint{
+    opacity:1;animation:none
   }
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="container">
+<!-- NAV -->
+<nav class="nav" id="nav" role="navigation" aria-label="Hoofdnavigatie">
+  <div class="nav-inner">
     <a href="/" class="logo" aria-label="Ombaa">
       <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="22" cy="20" r="18" fill="#4A2D3E"/>
         <circle cx="42" cy="20" r="18" fill="#C4614A"/>
-        <ellipse cx="32" cy="20" rx="6" ry="12" fill="#7A3D52"/>
+        <circle cx="32" cy="20" r="6" fill="#7A3D52"/>
       </svg>
       <span class="logo-text">Ombaa</span>
     </a>
+    <a href="#aanmelden" class="nav-cta">Ik ga mee</a>
   </div>
-</header>
+</nav>
 
 <main>
 
+  <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
-    <div class="container">
-      <h1 id="hero-title">Kom je ook?</h1>
-      <p class="subkop">Zeg wat je wil doen. Iemand doet mee.</p>
-      <p class="intro">
-        Ombaa is een nieuwe app waar je met je stem een idee deelt — een wandeling, een terrasje, een museumbezoek. Anderen reageren met hun stem, en jij kiest met wie je op pad gaat.
-      </p>
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <span class="hero-kicker">Nieuw — schrijf je nu in</span>
+      <h1 id="hero-title">
+        Je vrienden zijn druk.<br>
+        Maar jij wil gewoon met iemand<br>
+        <em>zaterdag naar de markt.</em>
+      </h1>
+      <p class="hero-sub">Zeg wat je wil doen. Iemand gaat met je mee.</p>
+      <div class="hero-actions">
+        <a href="#aanmelden" class="btn btn-primary">Ik ga mee</a>
+        <a href="#hoe" class="btn btn-ghost">Hoe werkt het?</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
   </section>
 
-  <section aria-labelledby="hoe-title">
-    <div class="container">
-      <h2 id="hoe-title">Hoe het werkt</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num" aria-hidden="true">1</div>
-          <div>
-            <h3>Spreek in wat je wil doen</h3>
-            <p>Een korte spraakbericht — in jouw eigen woorden. Geen formulieren, geen profielfoto's.</p>
-          </div>
+  <!-- STATEMENT -->
+  <section class="statement" aria-label="Wat Ombaa anders maakt">
+    <p class="reveal">
+      Geen swipen.<br>
+      Geen profielfoto's.<br>
+      <em>Gewoon jouw stem.</em>
+    </p>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="hoe" aria-labelledby="how-title">
+    <div class="how-top reveal">
+      <span class="section-label">Hoe het werkt</span>
+      <h2 id="how-title">In drie stappen.</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>Spreek in wat je wil doen</h3>
+          <p>Een kort berichtje in jouw eigen woorden. Geen formulieren, geen keuzemenu's.</p>
         </div>
-        <div class="step">
-          <div class="step-num" aria-hidden="true">2</div>
-          <div>
-            <h3>Iemand reageert met hun stem</h3>
-            <p>Je hoort meteen wie er meewil. Een stem zegt meer dan een tekstje.</p>
-          </div>
+      </div>
+      <div class="step reveal" data-d="1">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>Iemand reageert met hun stem</h3>
+          <p>Je hoort meteen wie er meewil. Een stem zegt meer dan een foto.</p>
         </div>
-        <div class="step">
-          <div class="step-num" aria-hidden="true">3</div>
-          <div>
-            <h3>Jij kiest wie er meekomt</h3>
-            <p>Je houdt zelf de regie. Je beslist met wie je afspreekt en wanneer.</p>
-          </div>
+      </div>
+      <div class="step reveal" data-d="2">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>Jij kiest wie er meekomt</h3>
+          <p>Jij houdt de regie. Geen verrassingen.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section aria-labelledby="signup-title">
-    <div class="container">
-      <div class="signup">
-        <h2 id="signup-title">Doe mee met de eerste groep</h2>
-        <p class="lead">Laat je naam en e-mail achter. Je hoort het als eerste wanneer Ombaa er is.</p>
+  <!-- SIGNUP -->
+  <section class="signup" id="aanmelden" aria-labelledby="signup-title">
+    <div class="signup-inner">
+      <h2 id="signup-title" class="reveal">Doe mee met<br>de eerste groep.</h2>
+      <p class="signup-sub reveal" data-d="1">Je hoort het als eerste wanneer Ombaa er is.</p>
 
-        <!--
-          Brevo / Mailchimp koppeling:
-          Vervang het action-attribuut hieronder met je Brevo of Mailchimp
-          form endpoint. Voorbeelden:
-            Brevo:     https://xxxx.sibforms.com/serve/MUIFA...
-            Mailchimp: https://ombaa.us21.list-manage.com/subscribe/post?u=XXX&id=YYY
-        -->
-        <form id="signupForm"
-              action="https://YOUR-BREVO-OR-MAILCHIMP-ENDPOINT"
-              method="POST"
-              target="_blank"
-              novalidate>
-
-          <div>
-            <label for="naam">Je naam</label>
-            <input type="text" id="naam" name="NAAM" autocomplete="given-name" required />
-          </div>
-
-          <div>
-            <label for="email">Je e-mailadres</label>
-            <input type="email" id="email" name="EMAIL" autocomplete="email" required />
-          </div>
-
-          <button type="submit">Ik doe mee</button>
-
-          <p class="form-note">We gebruiken je gegevens alleen om je te laten weten wanneer Ombaa klaar is. Je kan je altijd uitschrijven.</p>
-        </form>
-
-        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
-          Dankjewel — je staat op de lijst. We laten van ons horen.
+      <form id="signupForm"
+            action="https://formspree.io/f/JOUW_ID"
+            method="POST"
+            class="reveal" data-d="2"
+            novalidate>
+        <div class="field">
+          <label for="naam">Naam</label>
+          <input type="text" id="naam" name="naam" autocomplete="given-name" placeholder="Jouw naam" required />
         </div>
+        <div class="field">
+          <label for="email">E-mailadres</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="jij@voorbeeld.nl" required />
+        </div>
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary">Ik ga mee</button>
+          <p class="privacy-note">We gebruiken je gegevens alleen om je te laten weten wanneer Ombaa klaar is.</p>
+        </div>
+      </form>
+
+      <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+        Dankjewel —<br>je staat op de lijst.<br>We laten van ons horen.
       </div>
     </div>
   </section>
@@ -362,41 +680,83 @@
 </main>
 
 <footer>
-  <div class="container">
-    <a href="/" class="logo" aria-label="Ombaa">
-      <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="22" cy="20" r="18" fill="#4A2D3E"/>
-        <circle cx="42" cy="20" r="18" fill="#C4614A"/>
-        <ellipse cx="32" cy="20" rx="6" ry="12" fill="#7A3D52"/>
-      </svg>
-      <span class="logo-text">Ombaa</span>
-    </a>
-    <p class="tag">Kom je ook?</p>
-    <p class="site">ombaa.com</p>
-  </div>
+  <a href="/" class="logo" aria-label="Ombaa">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="22" cy="20" r="18" fill="#4A2D3E"/>
+      <circle cx="42" cy="20" r="18" fill="#C4614A"/>
+      <circle cx="32" cy="20" r="6" fill="#7A3D52"/>
+    </svg>
+    <span class="logo-text">Ombaa</span>
+  </a>
+  <p class="footer-tag reveal">Kom je ook?</p>
+  <p class="footer-url reveal" data-d="1">ombaa.com</p>
 </footer>
 
 <script>
-  (function(){
-    var form = document.getElementById('signupForm');
-    var success = document.getElementById('formSuccess');
-    if(!form) return;
+// Nav scroll effect
+(function(){
+  var nav = document.getElementById('nav');
+  function tick(){
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }
+  window.addEventListener('scroll', tick, {passive:true});
+  tick();
+})();
 
-    form.addEventListener('submit', function(e){
-      var naam = form.naam.value.trim();
-      var email = form.email.value.trim();
-      if(!naam || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-        e.preventDefault();
-        alert('Vul je naam en een geldig e-mailadres in.');
-        return;
+// Scroll reveal
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('visible')});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
       }
-      // Toon bevestiging — formulier wordt naar Brevo/Mailchimp gestuurd in nieuw tabblad
-      setTimeout(function(){
-        form.style.display = 'none';
-        success.classList.add('show');
-      }, 200);
     });
-  })();
+  },{threshold:.1, rootMargin:'0px 0px -48px 0px'});
+  els.forEach(function(el){io.observe(el)});
+})();
+
+// Form
+(function(){
+  var form = document.getElementById('signupForm');
+  var success = document.getElementById('formSuccess');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var naam = form.naam.value.trim();
+    var email = form.email.value.trim();
+    if(!naam || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      alert('Vul je naam en een geldig e-mailadres in.');
+      return;
+    }
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Een momentje…';
+    fetch(form.action,{
+      method:'POST',
+      body:new FormData(form),
+      headers:{'Accept':'application/json'}
+    }).then(function(r){
+      if(r.ok){
+        form.style.display='none';
+        success.classList.add('show');
+      } else {
+        btn.disabled=false;
+        btn.textContent='Ik ga mee';
+        alert('Er ging iets mis. Probeer het zo nog eens.');
+      }
+    }).catch(function(){
+      btn.disabled=false;
+      btn.textContent='Ik ga mee';
+      alert('Er ging iets mis. Probeer het zo nog eens.');
+    });
+  });
+})();
 </script>
 
 </body>
