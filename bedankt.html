@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gelukt — Ombaa</title>
+<meta name="robots" content="noindex" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;1,300&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 40'%3E%3Ccircle cx='22' cy='20' r='18' fill='%234A2D3E'/%3E%3Ccircle cx='42' cy='20' r='18' fill='%23C4614A'/%3E%3Ccircle cx='32' cy='20' r='6' fill='%237A3D52'/%3E%3C/svg%3E" />
+
+<style>
+:root{
+  --cream:#F5F0E8;
+  --terracotta:#C4614A;
+  --terracotta-dark:#A8513E;
+  --aubergine:#4A2D3E;
+  --overlap:#7A3D52;
+  --warm-grey:#5C4A42;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-size:18px;
+  line-height:1.6;
+  background:var(--cream);
+  color:var(--warm-grey);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:999;
+  opacity:.032;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+
+/* Nav */
+nav{
+  padding:28px 40px;
+  display:flex;
+  align-items:center;
+}
+.logo{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+.logo svg{display:block;height:34px;width:auto}
+.logo-text{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:24px;
+  color:var(--aubergine);
+}
+
+/* Main */
+main{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 40px 100px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Orb */
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  pointer-events:none;
+}
+.orb-1{
+  width:50vw;height:50vw;
+  background:radial-gradient(circle, #7A3D52 0%, transparent 70%);
+  top:-20%;left:-10%;
+  opacity:.4;
+  animation:drift 20s ease-in-out infinite alternate;
+}
+.orb-2{
+  width:40vw;height:40vw;
+  background:radial-gradient(circle, #C4614A 0%, transparent 70%);
+  bottom:-15%;right:-5%;
+  opacity:.25;
+  animation:drift 26s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift{
+  from{transform:translate(0,0)}
+  to{transform:translate(4vw,3vh)}
+}
+
+.content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width:640px;
+}
+
+/* Checkmark */
+.check{
+  width:72px;height:72px;
+  border-radius:50%;
+  background:var(--terracotta);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 48px;
+  opacity:0;
+  animation:popIn .6s .1s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.check svg{display:block}
+
+h1{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(40px,6vw,72px);
+  color:var(--aubergine);
+  letter-spacing:-.02em;
+  line-height:1.1;
+  margin-bottom:24px;
+  opacity:0;
+  animation:fadeUp .8s .3s cubic-bezier(.2,.6,.2,1) forwards;
+}
+h1 em{font-style:italic;color:var(--terracotta)}
+
+p{
+  font-size:20px;
+  color:var(--warm-grey);
+  max-width:400px;
+  margin:0 auto 56px;
+  line-height:1.6;
+  opacity:0;
+  animation:fadeUp .8s .45s cubic-bezier(.2,.6,.2,1) forwards;
+}
+
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:'DM Sans',sans-serif;
+  font-weight:500;
+  font-size:17px;
+  color:var(--aubergine);
+  text-decoration:none;
+  border:1.5px solid rgba(74,45,62,.25);
+  border-radius:999px;
+  padding:14px 28px;
+  transition:border-color .2s ease, background .2s ease;
+  opacity:0;
+  animation:fadeUp .8s .6s cubic-bezier(.2,.6,.2,1) forwards;
+}
+.back:hover{
+  border-color:var(--aubergine);
+  background:rgba(74,45,62,.04);
+}
+
+@keyframes popIn{
+  from{opacity:0;transform:scale(.6)}
+  to{opacity:1;transform:scale(1)}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:600px){
+  nav{padding:24px}
+  main{padding:32px 24px 80px}
+  h1{font-size:clamp(36px,9vw,52px)}
+  p{font-size:18px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .orb,.check,h1,p,.back{animation:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" aria-label="Ombaa — terug naar de homepage">
+    <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="22" cy="20" r="18" fill="#4A2D3E"/>
+      <circle cx="42" cy="20" r="18" fill="#C4614A"/>
+      <circle cx="32" cy="20" r="6" fill="#7A3D52"/>
+    </svg>
+    <span class="logo-text">Ombaa</span>
+  </a>
+</nav>
+
+<main>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <div class="content">
+    <div class="check" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 16.5L13 22.5L25 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>Je staat<br>op de lijst.<br><em>Kom je ook?</em></h1>
+    <p>We laten je het als eerste weten wanneer Ombaa er is. Tot gauw.</p>
+
+    <a href="/" class="back">
+      Terug naar ombaa.com
+    </a>
+  </div>
+</main>
+
+</body>
+</html>
