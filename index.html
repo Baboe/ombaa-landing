@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ombaa — Kom je ook?</title>
-<meta name="description" content="Zeg wat je wil doen. Iemand gaat met je mee. Schrijf je in voor Ombaa." />
+<title>Ombaa — Iemand om mee af te spreken | Kom je ook?</title>
+<meta name="description" content="Geen swipen, geen foto's. Zeg wat je wil doen — wandelen, de markt op, een terrasje — en iemand gaat met je mee. Schrijf je in voor Ombaa." />
 <meta name="theme-color" content="#F5F0E8" />
-<meta property="og:title" content="Ombaa — Kom je ook?" />
-<meta property="og:description" content="Zeg wat je wil doen. Iemand gaat met je mee. Schrijf je in voor Ombaa." />
+<meta property="og:title" content="Ombaa — Iemand om mee af te spreken | Kom je ook?" />
+<meta property="og:description" content="Geen swipen, geen foto's. Zeg wat je wil doen — wandelen, de markt op, een terrasje — en iemand gaat met je mee. Schrijf je in voor Ombaa." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ombaa.com/" />
 <meta property="og:locale" content="nl_NL" />
@@ -42,11 +42,57 @@
       "@type": "WebPage",
       "@id": "https://ombaa.com/#webpage",
       "url": "https://ombaa.com/",
-      "name": "Ombaa — Kom je ook?",
-      "description": "Zeg wat je wil doen. Iemand gaat met je mee. Schrijf je in voor Ombaa.",
+      "name": "Ombaa — Iemand om mee af te spreken | Kom je ook?",
+      "description": "Geen swipen, geen foto's. Zeg wat je wil doen — wandelen, de markt op, een terrasje — en iemand gaat met je mee. Schrijf je in voor Ombaa.",
       "inLanguage": "nl-NL",
       "isPartOf": {"@id": "https://ombaa.com/#website"},
       "about": {"@id": "https://ombaa.com/#organization"}
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ombaa.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is dit een datingapp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nee. Ombaa draait om samen iets doen, niet om daten."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Moet ik mijn foto delen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nee. Je stem is je profiel. Geen foto's nodig."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hoe weet ik of iemand te vertrouwen is?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jij kiest wie er meekomt — niemand wordt automatisch gekoppeld."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Waar is Ombaa beschikbaar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We starten in Nederland en Vlaanderen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wanneer is Ombaa er?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We bouwen nu de eerste versie. Schrijf je in en je hoort het als eerste."
+          }
+        }
+      ]
     }
   ]
 }
@@ -244,12 +290,26 @@ body::before{
 .hero-sub{
   font-size:clamp(18px,2vw,22px);
   color:var(--warm-grey);
-  margin-bottom:64px;
+  margin-bottom:12px;
   max-width:520px;
   margin-left:auto;
   margin-right:auto;
   opacity:0;
   animation:fadeUp .9s .5s cubic-bezier(.2,.6,.2,1) forwards;
+}
+.hero-sub-keywords{
+  font-size:15px;
+  color:var(--warm-grey);
+  opacity:0;
+  margin-bottom:64px;
+  max-width:480px;
+  margin-left:auto;
+  margin-right:auto;
+  animation:fadeUpKw .9s .58s cubic-bezier(.2,.6,.2,1) forwards;
+}
+@keyframes fadeUpKw{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:.7;transform:translateY(0)}
 }
 
 .hero-actions{
@@ -421,6 +481,92 @@ body::before{
   max-width:480px;
 }
 
+/* ── Voor wie ── */
+.for-who{
+  padding:160px 40px;
+  background:var(--cream);
+}
+.for-who-grid{
+  max-width:1000px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:80px;
+}
+.for-who h2{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(32px,4.2vw,52px);
+  color:var(--aubergine);
+  letter-spacing:-.02em;
+  line-height:1.15;
+  margin-bottom:24px;
+}
+.for-who p{
+  font-size:19px;
+  color:var(--warm-grey);
+  line-height:1.7;
+  max-width:460px;
+}
+.not-this{
+  border-left:1.5px solid rgba(74,45,62,.15);
+  padding-left:40px;
+}
+.not-this h3{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-style:italic;
+  font-size:clamp(22px,2.6vw,30px);
+  color:var(--terracotta);
+  margin-bottom:16px;
+}
+.not-this p{
+  font-size:17px;
+  color:var(--warm-grey);
+  line-height:1.7;
+}
+
+/* ── FAQ ── */
+.faq{
+  padding:160px 40px;
+  background:var(--cream);
+}
+.faq-top{
+  text-align:center;
+  margin-bottom:100px;
+}
+.faq h2{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(36px,5vw,64px);
+  color:var(--aubergine);
+  letter-spacing:-.02em;
+  line-height:1.1;
+}
+.faq-list{
+  max-width:760px;
+  margin:0 auto;
+}
+.faq-item{
+  border-top:1px solid rgba(74,45,62,.1);
+  padding:36px 0;
+}
+.faq-list .faq-item:last-child{border-bottom:1px solid rgba(74,45,62,.1)}
+.faq-item h3{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:300;
+  font-size:clamp(20px,2.4vw,26px);
+  color:var(--aubergine);
+  letter-spacing:-.01em;
+  margin-bottom:14px;
+}
+.faq-item p{
+  font-size:18px;
+  color:var(--warm-grey);
+  line-height:1.65;
+  max-width:600px;
+}
+
 /* ── Signup ── */
 .signup{
   background:var(--aubergine);
@@ -586,12 +732,19 @@ footer .logo{margin:0 auto 20px;display:flex;justify-content:center}
   .field input{font-size:20px}
 
   footer{padding:64px 24px 48px}
+
+  .for-who{padding:100px 24px}
+  .for-who-grid{grid-template-columns:1fr;gap:48px}
+  .not-this{border-left:none;border-top:1.5px solid rgba(74,45,62,.15);padding-left:0;padding-top:40px}
+
+  .faq{padding:100px 24px}
+  .faq-top{margin-bottom:64px}
 }
 
 @media(prefers-reduced-motion:reduce){
   .orb{animation:none}
   .scroll-line{animation:none}
-  .hero-kicker,.hero h1,.hero-sub,.hero-actions,.scroll-hint{
+  .hero-kicker,.hero h1,.hero-sub,.hero-sub-keywords,.hero-actions,.scroll-hint{
     opacity:1;animation:none
   }
   .reveal{opacity:1;transform:none}
@@ -632,6 +785,7 @@ footer .logo{margin:0 auto 20px;display:flex;justify-content:center}
         <em>zaterdag naar de markt.</em>
       </h1>
       <p class="hero-sub">Zeg wat je wil doen. Iemand gaat met je mee.</p>
+      <p class="hero-sub-keywords">Iemand om mee af te spreken — wandelen, de markt op, een terrasje.</p>
       <div class="hero-actions">
         <a href="#aanmelden" class="btn btn-primary">Ik ga mee</a>
         <a href="#hoe" class="btn btn-ghost">Hoe werkt het?</a>
@@ -685,6 +839,50 @@ footer .logo{margin:0 auto 20px;display:flex;justify-content:center}
     </div>
   </section>
 
+  <!-- VOOR WIE -->
+  <section class="for-who" id="voor-wie" aria-labelledby="for-who-title">
+    <div class="for-who-grid">
+      <div class="reveal">
+        <h2 id="for-who-title">Voor wie is Ombaa?</h2>
+        <p>Voor iedereen die weleens denkt: leuk om te doen, jammer dat ik niemand heb om mee te gaan. Een wandeling. Een markt. Een terrasje na het sporten. Ombaa is er voor dat moment.</p>
+      </div>
+      <div class="not-this reveal" data-d="1">
+        <h3>Wat het niet is</h3>
+        <p>Geen datingapp. Geen zorgapp. Geen swipen op foto's. Gewoon een stem en een plan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="faq-top reveal">
+      <span class="section-label">Veelgestelde vragen</span>
+      <h2 id="faq-title">Nog even dit.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <h3>Is dit een datingapp?</h3>
+        <p>Nee. Ombaa draait om samen iets doen, niet om daten.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>Moet ik mijn foto delen?</h3>
+        <p>Nee. Je stem is je profiel. Geen foto's nodig.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>Hoe weet ik of iemand te vertrouwen is?</h3>
+        <p>Jij kiest wie er meekomt — niemand wordt automatisch gekoppeld.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>Waar is Ombaa beschikbaar?</h3>
+        <p>We starten in Nederland en Vlaanderen.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>Wanneer is Ombaa er?</h3>
+        <p>We bouwen nu de eerste versie. Schrijf je in en je hoort het als eerste.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- SIGNUP -->
   <section class="signup" id="aanmelden" aria-labelledby="signup-title">
     <div class="signup-inner">
@@ -731,6 +929,7 @@ footer .logo{margin:0 auto 20px;display:flex;justify-content:center}
   </a>
   <p class="footer-tag reveal">Kom je ook?</p>
   <p class="footer-url reveal" data-d="1">ombaa.com</p>
+  <p class="footer-url"><a href="/blog/" style="color:inherit">Kennisbank</a></p>
 </footer>
 
 <script>
