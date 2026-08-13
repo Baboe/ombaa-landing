@@ -3,23 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gelukt — Ombaa</title>
+<title>Pagina niet gevonden — Ombaa</title>
 <meta name="robots" content="noindex" />
-<meta name="description" content="Je staat op de lijst voor Ombaa. We laten je het als eerste weten wanneer Ombaa er is." />
-<link rel="canonical" href="https://ombaa.com/bedankt" />
-<meta property="og:title" content="Je staat op de lijst — Ombaa" />
-<meta property="og:description" content="We laten je het als eerste weten wanneer Ombaa er is. Tot gauw." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://ombaa.com/bedankt" />
-<meta property="og:locale" content="nl_NL" />
-<meta property="og:image" content="https://ombaa.com/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Ombaa — Iemand om mee af te spreken" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Je staat op de lijst — Ombaa" />
-<meta name="twitter:description" content="We laten je het als eerste weten wanneer Ombaa er is. Tot gauw." />
-<meta name="twitter:image" content="https://ombaa.com/og-image.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -128,19 +113,14 @@ main{
   max-width:640px;
 }
 
-/* Checkmark */
-.check{
-  width:72px;height:72px;
-  border-radius:50%;
-  background:var(--terracotta);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+/* Mark */
+.mark{
+  width:72px;height:45px;
   margin:0 auto 48px;
   opacity:0;
   animation:popIn .6s .1s cubic-bezier(.34,1.56,.64,1) forwards;
 }
-.check svg{display:block}
+.mark svg{display:block;width:100%;height:100%}
 
 h1{
   font-family:'Fraunces',Georgia,serif;
@@ -158,11 +138,20 @@ h1 em{font-style:italic;color:var(--terracotta)}
 p{
   font-size:20px;
   color:var(--warm-grey);
-  max-width:400px;
+  max-width:420px;
   margin:0 auto 56px;
   line-height:1.6;
   opacity:0;
   animation:fadeUp .8s .45s cubic-bezier(.2,.6,.2,1) forwards;
+}
+
+.links{
+  display:inline-flex;
+  gap:16px;
+  flex-wrap:wrap;
+  justify-content:center;
+  opacity:0;
+  animation:fadeUp .8s .6s cubic-bezier(.2,.6,.2,1) forwards;
 }
 
 .back{
@@ -178,8 +167,6 @@ p{
   border-radius:999px;
   padding:14px 28px;
   transition:border-color .2s ease, background .2s ease;
-  opacity:0;
-  animation:fadeUp .8s .6s cubic-bezier(.2,.6,.2,1) forwards;
 }
 .back:hover{
   border-color:var(--aubergine);
@@ -203,7 +190,7 @@ p{
 }
 
 @media(prefers-reduced-motion:reduce){
-  .orb,.check,h1,p,.back{animation:none;opacity:1}
+  .orb,.mark,h1,p,.links{animation:none;opacity:1}
 }
 </style>
 </head>
@@ -225,18 +212,21 @@ p{
   <div class="orb orb-2" aria-hidden="true"></div>
 
   <div class="content">
-    <div class="check" aria-hidden="true">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7 16.5L13 22.5L25 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="20" r="18" fill="#4A2D3E"/>
+        <circle cx="42" cy="20" r="18" fill="#C4614A"/>
+        <circle cx="32" cy="20" r="6" fill="#7A3D52"/>
       </svg>
     </div>
 
-    <h1>Je staat<br>op de lijst.<br><em>Leuk dat je ook meegaat.</em></h1>
-    <p>We laten je het als eerste weten wanneer Ombaa er is. Tot gauw.</p>
+    <h1>Deze pagina<br>bestaat niet <em>(meer)</em>.</h1>
+    <p>Misschien is de link verouderd, of heb je iets verkeerd getypt. Geen zorgen — je vindt je weg hieronder.</p>
 
-    <a href="/" class="back">
-      Terug naar ombaa.com
-    </a>
+    <div class="links">
+      <a href="/" class="back">Terug naar ombaa.com</a>
+      <a href="/blog/" class="back">Naar de kennisbank</a>
+    </div>
   </div>
 </main>
 
