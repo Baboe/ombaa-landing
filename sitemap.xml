@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ombaa.com/</loc>
+    <loc>https://www.ombaa.com/</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ombaa.com/blog/</loc>
+    <loc>https://www.ombaa.com/blog/</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.ombaa.com/blog/iets-doen-aan-eenzaamheid-na-je-45e</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ombaa.com/blog/iets-doen-aan-eenzaamheid-na-je-45e</loc>
-    <lastmod>2026-08-13</lastmod>
+    <loc>https://www.ombaa.com/blog/nieuwe-vrienden-maken-na-je-50e</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.ombaa.com/blog/kinderen-het-huis-uit-wat-nu</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.ombaa.com/blog/alleen-ergens-naartoe-gaan</loc>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
